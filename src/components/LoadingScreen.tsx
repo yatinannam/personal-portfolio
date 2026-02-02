@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 interface LoadingScreenProps {
   onComplete: () => void;
@@ -18,16 +18,16 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, type: 'spring', stiffness: 100 }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
           className="relative w-24 h-24 mx-auto mb-8"
         >
           {/* Outer ring */}
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
             className="absolute inset-0 rounded-full border-2 border-transparent border-t-primary border-r-accent"
           />
-          
+
           {/* Inner content */}
           <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
             <motion.span
@@ -36,7 +36,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
               transition={{ delay: 0.5 }}
               className="text-3xl font-display font-bold gradient-text"
             >
-              JD
+              YA
             </motion.span>
           </div>
         </motion.div>
@@ -48,13 +48,13 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           transition={{ delay: 0.8 }}
           className="space-y-2"
         >
-          <p className="text-muted-foreground">Loading awesome things...</p>
-          
+          <p className="text-muted-foreground">Loading my portfolio...</p>
+
           {/* Progress bar */}
           <div className="w-48 h-1 bg-muted rounded-full overflow-hidden mx-auto">
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: '100%' }}
+              animate={{ width: "100%" }}
               transition={{ duration: 1.5, delay: 0.5 }}
               className="h-full bg-gradient-to-r from-primary via-accent to-secondary"
             />
