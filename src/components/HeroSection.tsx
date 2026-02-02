@@ -1,8 +1,19 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowDown, Download, Github, Linkedin, Twitter } from 'lucide-react';
 import FloatingShapes from './FloatingShapes';
 
 const HeroSection = () => {
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollIndicator(window.scrollY < 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const titleWords = ['Creative', 'Developer'];
   
   const scrollToAbout = () => {
@@ -141,22 +152,27 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.button
-        onClick={scrollToAbout}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-        >
-          <span className="text-sm">Scroll Down</span>
-          <ArrowDown className="w-5 h-5" />
-        </motion.div>
-      </motion.button>
+      <AnimatePresence>
+        {showScrollIndicator && (
+          <motion.button
+            onClick={scrollToAbout}
+            className="absolute bottom-10 left-0 right-0 mx-auto w-fit"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+            >
+              <span className="text-sm">Scroll Down</span>
+              <ArrowDown className="w-5 h-5" />
+            </motion.div>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
