@@ -147,7 +147,7 @@ const ContactSection = () => {
 
             {/* Resume Download */}
             <motion.a
-              href="/resume.pdf"
+              href="/Yatin-Annam-Resume.pdf"
               download
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
