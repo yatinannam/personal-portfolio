@@ -1,5 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 import {
   Mail,
   MapPin,
@@ -9,6 +11,7 @@ import {
   Github,
   Linkedin,
   Twitter,
+  Loader2,
 } from "lucide-react";
 
 const ContactSection = () => {
@@ -19,12 +22,50 @@ const ContactSection = () => {
     email: "",
     message: "",
   });
+  const [honeypot, setHoneypot] = useState(""); // Bot trap
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - could integrate with email service
-    window.location.href = `mailto:ninjayatin@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
+
+    // Honeypot check - if filled, it's a bot
+    if (honeypot) {
+      console.log("Bot detected");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      };
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+
+      toast.success("Message sent successfully!", {
+        description: "Thanks for reaching out. I'll get back to you soon!",
+      });
+
+      // Reset form
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast.error("Failed to send message", {
+        description:
+          "Please try again or email me directly at ninjayatin@gmail.com",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -168,6 +209,16 @@ const ContactSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <form onSubmit={handleSubmit} className="glass p-8 space-y-6">
+              {/* Honeypot field - hidden from users, bots will fill it */}
+              <input
+                type="text"
+                name="website"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+              />
               {/* Name Field */}
               <div className="relative">
                 <motion.label
@@ -257,17 +308,27 @@ const ContactSection = () => {
               {/* Submit Button */}
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full flex items-center justify-center gap-2 py-4 bg-primary text-primary-foreground rounded-xl font-semibold group"
+                disabled={isSubmitting}
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                className="w-full flex items-center justify-center gap-2 py-4 bg-primary text-primary-foreground rounded-xl font-semibold group disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
-                <motion.span
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <Send className="w-5 h-5" />
-                </motion.span>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <Send className="w-5 h-5" />
+                    </motion.span>
+                  </>
+                )}
               </motion.button>
             </form>
           </motion.div>
