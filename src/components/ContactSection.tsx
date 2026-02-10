@@ -85,7 +85,9 @@ const ContactSection = () => {
       icon: MapPin,
       label: "Location",
       value: "Bengaluru, Karnataka",
-      href: "#",
+      href: "https://google.com/maps?q=Bengaluru,Karnataka",
+      target: "_blank",
+      rel: "noopener noreferrer",
     },
   ];
 
@@ -134,6 +136,8 @@ const ContactSection = () => {
                 <motion.a
                   key={info.label}
                   href={info.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   initial={{ opacity: 0, x: -30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
