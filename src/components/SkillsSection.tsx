@@ -1,40 +1,48 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 
 const skillCategories = [
   {
-    name: 'Frontend',
+    name: "Frontend",
     skills: [
-      { name: 'React', level: 95 },
-      { name: 'TypeScript', level: 90 },
-      { name: 'Next.js', level: 88 },
-      { name: 'Tailwind CSS', level: 92 },
-      { name: 'Vue.js', level: 75 },
+      { name: "React", level: 95 },
+      { name: "TypeScript", level: 90 },
+      { name: "Next.js", level: 88 },
+      { name: "Tailwind CSS", level: 92 },
+      { name: "Vue.js", level: 75 },
     ],
   },
   {
-    name: 'Backend',
+    name: "Backend",
     skills: [
-      { name: 'Node.js', level: 88 },
-      { name: 'Python', level: 82 },
-      { name: 'PostgreSQL', level: 85 },
-      { name: 'GraphQL', level: 78 },
-      { name: 'MongoDB', level: 80 },
+      { name: "Node.js", level: 88 },
+      { name: "Python", level: 82 },
+      { name: "PostgreSQL", level: 85 },
+      { name: "GraphQL", level: 78 },
+      { name: "MongoDB", level: 80 },
     ],
   },
   {
-    name: 'Tools & Design',
+    name: "Tools & Design",
     skills: [
-      { name: 'Figma', level: 90 },
-      { name: 'Git', level: 92 },
-      { name: 'Docker', level: 75 },
-      { name: 'AWS', level: 70 },
-      { name: 'CI/CD', level: 80 },
+      { name: "Figma", level: 90 },
+      { name: "Git", level: 92 },
+      { name: "Docker", level: 75 },
+      { name: "AWS", level: 70 },
+      { name: "CI/CD", level: 80 },
     ],
   },
 ];
 
-const SkillCard = ({ skill, index, isInView }: { skill: { name: string; level: number }; index: number; isInView: boolean }) => {
+const SkillCard = ({
+  skill,
+  index,
+  isInView,
+}: {
+  skill: { name: string; level: number };
+  index: number;
+  isInView: boolean;
+}) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -50,12 +58,12 @@ const SkillCard = ({ skill, index, isInView }: { skill: { name: string; level: n
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
         className="relative preserve-3d cursor-pointer"
-        style={{ transformStyle: 'preserve-3d' }}
+        style={{ transformStyle: "preserve-3d" }}
       >
         {/* Front */}
         <div
           className="glass-hover p-6 text-center backface-hidden"
-          style={{ backfaceVisibility: 'hidden' }}
+          style={{ backfaceVisibility: "hidden" }}
         >
           <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
             <span className="text-2xl font-display font-bold text-primary">
@@ -71,17 +79,23 @@ const SkillCard = ({ skill, index, isInView }: { skill: { name: string; level: n
               transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
             />
           </div>
-          <span className="text-sm text-muted-foreground mt-2 block">{skill.level}%</span>
+          <span className="text-sm text-muted-foreground mt-2 block">
+            {skill.level}%
+          </span>
         </div>
 
         {/* Back */}
         <div
           className="absolute inset-0 glass-hover p-6 text-center backface-hidden"
-          style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <div className="h-full flex flex-col items-center justify-center">
-            <span className="text-4xl font-display font-bold gradient-text">{skill.level}%</span>
-            <span className="text-sm text-muted-foreground mt-2">Proficiency Level</span>
+            <span className="text-4xl font-display font-bold gradient-text">
+              {skill.level}%
+            </span>
+            <span className="text-sm text-muted-foreground mt-2">
+              Proficiency Level
+            </span>
             <div className="mt-4 w-full">
               <div className="h-2 bg-muted rounded-full overflow-hidden">
                 <div
@@ -99,7 +113,7 @@ const SkillCard = ({ skill, index, isInView }: { skill: { name: string; level: n
 
 const SkillsSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeCategory, setActiveCategory] = useState(0);
 
   return (
@@ -127,8 +141,8 @@ const SkillsSection = () => {
               onClick={() => setActiveCategory(index)}
               className={`px-6 py-3 rounded-full font-medium transition-all ${
                 activeCategory === index
-                  ? 'bg-primary text-primary-foreground'
-                  : 'glass hover:bg-muted'
+                  ? "bg-primary text-primary-foreground"
+                  : "glass hover:bg-muted"
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -148,7 +162,12 @@ const SkillsSection = () => {
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
         >
           {skillCategories[activeCategory].skills.map((skill, index) => (
-            <SkillCard key={skill.name} skill={skill} index={index} isInView={isInView} />
+            <SkillCard
+              key={skill.name}
+              skill={skill}
+              index={index}
+              isInView={isInView}
+            />
           ))}
         </motion.div>
 
@@ -160,10 +179,10 @@ const SkillsSection = () => {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {[
-            { label: 'Projects Completed', value: '50+' },
-            { label: 'Happy Clients', value: '30+' },
-            { label: 'Years Experience', value: '5+' },
-            { label: 'Technologies', value: '20+' },
+            { label: "Projects Completed", value: "20+" },
+            { label: "Happy Clients", value: "30+" },
+            { label: "Year Experience", value: "1" },
+            { label: "Technologies", value: "20+" },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
