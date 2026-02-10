@@ -1,29 +1,60 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
-import { Mail, MapPin, Phone, Send, Download, Github, Linkedin, Twitter } from 'lucide-react';
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Download,
+  Github,
+  Linkedin,
+  Twitter,
+} from "lucide-react";
 
 const ContactSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission - could integrate with email service
-    window.location.href = `mailto:john@example.com?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
+    window.location.href = `mailto:ninjayatin@gmail.com?subject=Portfolio Contact from ${formData.name}&body=${formData.message}`;
   };
 
   const contactInfo = [
-    { icon: Mail, label: 'Email', value: 'john@example.com', href: 'mailto:john@example.com' },
-    { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: MapPin, label: 'Location', value: 'San Francisco, CA', href: '#' },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "ninjayatin@gmail.com",
+      href: "mailto:ninjayatin@gmail.com",
+    },
+    {
+      icon: Phone,
+      label: "Phone",
+      value: "+91 88673 31342",
+      href: "tel:+918867331342",
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Bengaluru, Karnataka",
+      href: "#",
+    },
   ];
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+    { icon: Github, href: "https://github.com/yatinannam", label: "GitHub" },
+    {
+      icon: Linkedin,
+      href: "https://linkedin.com/in/yatinannam",
+      label: "LinkedIn",
+    },
   ];
 
   return (
@@ -51,8 +82,8 @@ const ContactSection = () => {
                 Let's work together!
               </h3>
               <p className="text-muted-foreground">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. 
-                Feel free to reach out!
+                I'm always open to discussing new projects, creative ideas, or
+                opportunities to be part of your vision. Feel free to reach out!
               </p>
             </div>
 
@@ -75,8 +106,12 @@ const ContactSection = () => {
                     <info.icon className="w-5 h-5 text-primary" />
                   </motion.div>
                   <div>
-                    <p className="text-sm text-muted-foreground">{info.label}</p>
-                    <p className="font-medium group-hover:text-primary transition-colors">{info.value}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {info.label}
+                    </p>
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      {info.value}
+                    </p>
                   </div>
                 </motion.a>
               ))}
@@ -137,21 +172,26 @@ const ContactSection = () => {
               <div className="relative">
                 <motion.label
                   animate={{
-                    y: focusedField === 'name' || formData.name ? -24 : 0,
-                    scale: focusedField === 'name' || formData.name ? 0.85 : 1,
-                    color: focusedField === 'name' ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))',
+                    y: focusedField === "name" || formData.name ? 0 : 16,
+                    scale: focusedField === "name" || formData.name ? 0.75 : 1,
+                    color:
+                      focusedField === "name"
+                        ? "hsl(var(--primary))"
+                        : "hsl(var(--muted-foreground))",
                   }}
-                  className="absolute left-4 top-4 origin-left pointer-events-none"
+                  className="absolute left-4 top-1 origin-left pointer-events-none z-10"
                 >
                   Your Name
                 </motion.label>
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  onFocus={() => setFocusedField('name')}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  onFocus={() => setFocusedField("name")}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors"
+                  className="w-full pt-7 pb-2 px-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors"
                   required
                 />
               </div>
@@ -160,21 +200,27 @@ const ContactSection = () => {
               <div className="relative">
                 <motion.label
                   animate={{
-                    y: focusedField === 'email' || formData.email ? -24 : 0,
-                    scale: focusedField === 'email' || formData.email ? 0.85 : 1,
-                    color: focusedField === 'email' ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))',
+                    y: focusedField === "email" || formData.email ? 0 : 16,
+                    scale:
+                      focusedField === "email" || formData.email ? 0.75 : 1,
+                    color:
+                      focusedField === "email"
+                        ? "hsl(var(--primary))"
+                        : "hsl(var(--muted-foreground))",
                   }}
-                  className="absolute left-4 top-4 origin-left pointer-events-none"
+                  className="absolute left-4 top-1 origin-left pointer-events-none z-10"
                 >
                   Your Email
                 </motion.label>
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  onFocus={() => setFocusedField('email')}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  onFocus={() => setFocusedField("email")}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full p-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors"
+                  className="w-full pt-7 pb-2 px-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors"
                   required
                 />
               </div>
@@ -183,21 +229,27 @@ const ContactSection = () => {
               <div className="relative">
                 <motion.label
                   animate={{
-                    y: focusedField === 'message' || formData.message ? -24 : 0,
-                    scale: focusedField === 'message' || formData.message ? 0.85 : 1,
-                    color: focusedField === 'message' ? 'hsl(var(--primary))' : 'hsl(var(--muted-foreground))',
+                    y: focusedField === "message" || formData.message ? 0 : 16,
+                    scale:
+                      focusedField === "message" || formData.message ? 0.75 : 1,
+                    color:
+                      focusedField === "message"
+                        ? "hsl(var(--primary))"
+                        : "hsl(var(--muted-foreground))",
                   }}
-                  className="absolute left-4 top-4 origin-left pointer-events-none"
+                  className="absolute left-4 top-1 origin-left pointer-events-none z-10"
                 >
                   Your Message
                 </motion.label>
                 <textarea
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  onFocus={() => setFocusedField('message')}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  onFocus={() => setFocusedField("message")}
                   onBlur={() => setFocusedField(null)}
                   rows={5}
-                  className="w-full p-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors resize-none"
+                  className="w-full pt-7 pb-2 px-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors resize-none"
                   required
                 />
               </div>
