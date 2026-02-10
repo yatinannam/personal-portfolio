@@ -95,26 +95,26 @@ const AboutSection = () => {
             className="space-y-6"
           >
             <h3 className="text-2xl md:text-3xl font-display font-semibold">
-              Crafting Digital Experiences with{" "}
-              <span className="gradient-text">Passion & Precision</span>
+              <span className="gradient-text">
+                Building. Breaking. Improving.
+              </span>
             </h3>
 
             <div className="space-y-4 text-muted-foreground">
               <p>
-                I'm a full-stack developer and designer based in San Francisco,
-                with a passion for creating beautiful, functional, and
-                user-centered digital experiences.
+                I'm a full-stack developer and a cybersecurity student, with a
+                passion for creating beautiful, functional and user-centered
+                digital experiences.
               </p>
               <p>
-                With over 5 years of experience in the tech industry, I've had
-                the privilege of working with startups and established companies
-                alike, helping them bring their visions to life through
-                thoughtful design and clean code.
+                Backed by 1+ year of experience, I bring expertise in designing,
+                developing, and optimizing applications with clean architecture,
+                modern technologies, and a focus on performance and usability.
               </p>
               <p>
                 When I'm not coding, you'll find me exploring new technologies,
-                contributing to open-source projects, or enjoying a good cup of
-                coffee while sketching new ideas.
+                contributing to open-source projects or enjoying a good cup of
+                coffee :)
               </p>
             </div>
           </motion.div>
