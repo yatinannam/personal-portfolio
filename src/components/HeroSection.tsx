@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowDown, Download, Github, Linkedin, Twitter } from 'lucide-react';
-import FloatingShapes from './FloatingShapes';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowDown, Download, Github, Linkedin, Twitter } from "lucide-react";
+import FloatingShapes from "./FloatingShapes";
 
 const HeroSection = () => {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
@@ -11,19 +11,22 @@ const HeroSection = () => {
       setShowScrollIndicator(window.scrollY < 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const titleWords = ['Creative', 'Developer'];
-  
+  const titleWords = ["Creative", "Developer"];
+
   const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="home" className="section relative flex items-center justify-center min-h-screen">
+    <section
+      id="home"
+      className="section relative flex items-center justify-center min-h-screen"
+    >
       <FloatingShapes />
-      
+
       <div className="container mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Greeting */}
@@ -33,7 +36,7 @@ const HeroSection = () => {
             transition={{ duration: 0.5 }}
             className="text-primary font-medium mb-4 tracking-wider"
           >
-            👋 Hello, I'm
+            Hey there, I'm
           </motion.p>
 
           {/* Name */}
@@ -43,7 +46,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6"
           >
-            <span className="gradient-text glow-text">John Doe</span>
+            <span className="gradient-text glow-text">Yatin Annam</span>
           </motion.h1>
 
           {/* Animated Title */}
@@ -61,7 +64,7 @@ const HeroSection = () => {
                 transition={{
                   duration: 0.8,
                   delay: 0.4 + index * 0.2,
-                  type: 'spring',
+                  type: "spring",
                   stiffness: 100,
                 }}
                 className="text-3xl md:text-5xl lg:text-6xl font-display font-light text-muted-foreground"
@@ -78,8 +81,7 @@ const HeroSection = () => {
             transition={{ delay: 0.8 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            I craft beautiful digital experiences with clean code and creative design.
-            Turning complex problems into elegant solutions.
+            I turn coffee into code and ideas into smooth digital experiences.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -93,7 +95,9 @@ const HeroSection = () => {
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                document
+                  .getElementById("projects")
+                  ?.scrollIntoView({ behavior: "smooth" });
               }}
               className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold overflow-hidden"
               whileHover={{ scale: 1.05 }}
@@ -102,14 +106,14 @@ const HeroSection = () => {
               <span className="relative z-10">View My Work</span>
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary"
-                initial={{ x: '-100%' }}
+                initial={{ x: "-100%" }}
                 whileHover={{ x: 0 }}
                 transition={{ duration: 0.3 }}
               />
             </motion.a>
 
             <motion.a
-              href="/resume.pdf"
+              href="/Yatin-Annam-Resume.pdf"
               download
               className="group flex items-center gap-2 px-8 py-4 border border-primary/50 text-foreground rounded-full font-semibold hover:border-primary transition-colors"
               whileHover={{ scale: 1.05 }}
@@ -128,9 +132,16 @@ const HeroSection = () => {
             className="flex items-center justify-center gap-6"
           >
             {[
-              { icon: Github, href: 'https://github.com', label: 'GitHub' },
-              { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-              { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+              {
+                icon: Github,
+                href: "https://github.com/yatinannam",
+                label: "GitHub",
+              },
+              {
+                icon: Linkedin,
+                href: "https://linkedin.com/in/yatinannam",
+                label: "LinkedIn",
+              },
             ].map((social, index) => (
               <motion.a
                 key={social.label}
