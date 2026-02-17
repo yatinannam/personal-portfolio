@@ -7,29 +7,39 @@ const skillCategories = [
     skills: [
       { name: "React", level: 95 },
       { name: "TypeScript", level: 90 },
-      { name: "Next.js", level: 88 },
-      { name: "Tailwind CSS", level: 92 },
-      { name: "Vue.js", level: 75 },
+      { name: "Tailwind CSS", level: 85 },
+      { name: "Next.js", level: 75 },
+      { name: "Flutter", level: 50 },
     ],
   },
   {
     name: "Backend",
     skills: [
-      { name: "Node.js", level: 88 },
-      { name: "Python", level: 82 },
-      { name: "PostgreSQL", level: 85 },
-      { name: "GraphQL", level: 78 },
-      { name: "MongoDB", level: 80 },
+      { name: "Node.js", level: 95 },
+      { name: "MySQL", level: 95 },
+      { name: "MongoDB", level: 90 },
+      { name: "Python", level: 75 },
+      { name: "PostgreSQL", level: 60 },
     ],
   },
   {
-    name: "Tools & Design",
+    name: "Languages",
     skills: [
-      { name: "Figma", level: 90 },
-      { name: "Git", level: 92 },
-      { name: "Docker", level: 75 },
-      { name: "AWS", level: 70 },
-      { name: "CI/CD", level: 80 },
+      { name: "Java", level: 80 },
+      { name: "C", level: 70 },
+      { name: "Python", level: 70 },
+      { name: "C++", level: 65 },
+      { name: "Ruby", level: 40 },
+    ],
+  },
+  {
+    name: "Tools",
+    skills: [
+      { name: "Git/GitHub", level: 95 },
+      { name: "AWS", level: 60 },
+      { name: "n8n", level: 55 },
+      { name: "Docker", level: 50 },
+      { name: "Figma", level: 45 },
     ],
   },
 ];
@@ -176,13 +186,12 @@ const SkillsSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="mt-20 grid grid-cols-2 md:grid-cols-3 gap-8"
         >
           {[
             { label: "Projects Completed", value: "20+" },
-            { label: "Happy Clients", value: "30+" },
             { label: "Year Experience", value: "1" },
-            { label: "Technologies", value: "20+" },
+            { label: "Technologies", value: "10+" },
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
