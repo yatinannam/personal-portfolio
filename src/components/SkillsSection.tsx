@@ -5,41 +5,41 @@ const skillCategories = [
   {
     name: "Frontend",
     skills: [
-      { name: "React", level: 95 },
-      { name: "TypeScript", level: 90 },
-      { name: "Tailwind CSS", level: 85 },
-      { name: "Next.js", level: 75 },
-      { name: "Flutter", level: 50 },
+      { name: "React" },
+      { name: "TypeScript" },
+      { name: "Tailwind CSS" },
+      { name: "Next.js" },
+      { name: "Flutter" },
     ],
   },
   {
     name: "Backend",
     skills: [
-      { name: "Node.js", level: 95 },
-      { name: "MySQL", level: 95 },
-      { name: "MongoDB", level: 90 },
-      { name: "Python", level: 75 },
-      { name: "PostgreSQL", level: 60 },
+      { name: "Node.js" },
+      { name: "MySQL" },
+      { name: "MongoDB" },
+      { name: "Python" },
+      { name: "PostgreSQL" },
     ],
   },
   {
     name: "Languages",
     skills: [
-      { name: "Java", level: 80 },
-      { name: "C", level: 70 },
-      { name: "Python", level: 70 },
-      { name: "C++", level: 65 },
-      { name: "Ruby", level: 40 },
+      { name: "Java" },
+      { name: "C" },
+      { name: "Python" },
+      { name: "C++" },
+      { name: "Ruby" },
     ],
   },
   {
     name: "Tools",
     skills: [
-      { name: "Git/GitHub", level: 95 },
-      { name: "AWS", level: 60 },
-      { name: "n8n", level: 55 },
-      { name: "Docker", level: 50 },
-      { name: "Figma", level: 45 },
+      { name: "Git/GitHub" },
+      { name: "AWS" },
+      { name: "n8n" },
+      { name: "Docker" },
+      { name: "Figma" },
     ],
   },
 ];
@@ -49,74 +49,23 @@ const SkillCard = ({
   index,
   isInView,
 }: {
-  skill: { name: string; level: number };
+  skill: { name: string };
   index: number;
   isInView: boolean;
 }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
   return (
     <motion.div
-      initial={{ opacity: 0, rotateY: -90 }}
-      animate={isInView ? { opacity: 1, rotateY: 0 } : {}}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="perspective-1000"
-      onMouseEnter={() => setIsFlipped(true)}
-      onMouseLeave={() => setIsFlipped(false)}
+      className="glass-hover p-6 text-center cursor-pointer hover:scale-105 transition-transform"
     >
-      <motion.div
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative preserve-3d cursor-pointer"
-        style={{ transformStyle: "preserve-3d" }}
-      >
-        {/* Front */}
-        <div
-          className="glass-hover p-6 text-center backface-hidden"
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-            <span className="text-2xl font-display font-bold text-primary">
-              {skill.name.slice(0, 2)}
-            </span>
-          </div>
-          <h4 className="font-display font-semibold">{skill.name}</h4>
-          <div className="mt-4 skill-bar">
-            <motion.div
-              className="skill-bar-fill"
-              initial={{ width: 0 }}
-              animate={isInView ? { width: `${skill.level}%` } : {}}
-              transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-            />
-          </div>
-          <span className="text-sm text-muted-foreground mt-2 block">
-            {skill.level}%
-          </span>
-        </div>
-
-        {/* Back */}
-        <div
-          className="absolute inset-0 glass-hover p-6 text-center backface-hidden"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        >
-          <div className="h-full flex flex-col items-center justify-center">
-            <span className="text-4xl font-display font-bold gradient-text">
-              {skill.level}%
-            </span>
-            <span className="text-sm text-muted-foreground mt-2">
-              Proficiency Level
-            </span>
-            <div className="mt-4 w-full">
-              <div className="h-2 bg-muted rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+      <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+        <span className="text-2xl font-display font-bold text-primary">
+          {skill.name.slice(0, 2)}
+        </span>
+      </div>
+      <h4 className="font-display font-semibold">{skill.name}</h4>
     </motion.div>
   );
 };
