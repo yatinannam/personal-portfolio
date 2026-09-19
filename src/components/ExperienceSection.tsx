@@ -1,128 +1,133 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Briefcase, GraduationCap } from 'lucide-react';
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
-const experiences = [
+const experience = [
   {
-    id: 1,
-    type: 'work',
-    title: 'Senior Frontend Developer',
-    company: 'TechCorp Inc.',
-    period: '2022 - Present',
-    description: 'Leading the frontend team in building scalable web applications using React and TypeScript. Mentoring junior developers and implementing best practices.',
-    achievements: ['Improved app performance by 40%', 'Led team of 5 developers', 'Implemented CI/CD pipelines'],
+    title: "Full Stack Intern",
+    org: "EvoDoc",
+    period: "May 2026 — Present",
+    description:
+      "Contributing to hospital management and clinical information systems, building digital workflows across OPD, patient management, and hospital administration.",
+    points: [
+      "Full-stack features for production healthcare applications",
+      "Next.js, React, TypeScript, Supabase, and database workflows",
+      "Translating hospital processes into scalable software",
+    ],
   },
   {
-    id: 2,
-    type: 'work',
-    title: 'Full Stack Developer',
-    company: 'StartupHub',
-    period: '2020 - 2022',
-    description: 'Developed and maintained multiple full-stack applications. Collaborated with design team to create intuitive user interfaces.',
-    achievements: ['Built 3 products from scratch', 'Reduced load time by 60%', 'Integrated 10+ third-party APIs'],
+    title: "Technical Lead",
+    org: "Founders Club",
+    period: "Mar 2025 — Present",
+    description:
+      "Leading the technical direction of a multi-project engineering team, from architecture to production delivery.",
+    points: [
+      "Architecture, code review, and Git workflow standards",
+      "Mentoring developers on full-stack practices and code quality",
+      "Delivery across the club's software ecosystem",
+    ],
+  },
+];
+
+const education = [
+  {
+    school: "SRM Institute of Science and Technology, Chennai",
+    program: "B.Tech, Computer Science Engineering (Cybersecurity)",
+    period: "Aug 2024 — May 2028",
   },
   {
-    id: 3,
-    type: 'education',
-    title: 'Master of Computer Science',
-    company: 'Stanford University',
-    period: '2018 - 2020',
-    description: 'Specialized in Human-Computer Interaction and Software Engineering. Thesis on improving accessibility in web applications.',
-    achievements: ['GPA: 3.9/4.0', 'Published 2 research papers', 'Teaching Assistant for Web Dev'],
+    school: "Sri Chaitanya Techno School",
+    program: "PCMC, CBSE 12th",
+    period: "Jul 2022 — Mar 2024",
   },
-  {
-    id: 4,
-    type: 'work',
-    title: 'Junior Developer',
-    company: 'Digital Agency',
-    period: '2017 - 2018',
-    description: 'Started my professional journey building websites and web applications for various clients across different industries.',
-    achievements: ['Completed 20+ client projects', 'Learned agile methodologies', 'First experience with React'],
-  },
+];
+
+const certifications = [
+  { name: "Artificial Intelligence Fundamentals", issuer: "IBM SkillsBuild", date: "Jul 2025" },
+  { name: "Introduction to Critical Infrastructure Protection", issuer: "OPSWAT Academy", date: "Jun 2025" },
 ];
 
 const ExperienceSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="section relative">
-      <div className="container mx-auto" ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+    <section id="experience" className="section">
+      <div className="section-inner" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="section-title"
+          transition={{ duration: 0.5 }}
         >
-          <span className="gradient-text">Experience</span>
-        </motion.h2>
+          <p className="section-kicker">Experience</p>
+          <h2 className="section-title">Where I've worked</h2>
+        </motion.div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Timeline Line */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-secondary origin-top"
-          />
-
-          {/* Timeline Items */}
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
-              className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}
-            >
-              {/* Timeline Dot */}
+        <div className="mt-14 max-w-3xl">
+          <div className="relative border-l border-border pl-8 space-y-14">
+            {experience.map((role, index) => (
               <motion.div
-                initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.2 }}
-                className="absolute left-8 md:left-1/2 -translate-x-1/2 z-10"
+                key={role.title}
+                initial={{ opacity: 0, y: 16 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
+                className="relative"
               >
-                <div className="w-12 h-12 rounded-full bg-background border-4 border-primary flex items-center justify-center pulse-glow">
-                  {exp.type === 'work' ? (
-                    <Briefcase className="w-5 h-5 text-primary" />
-                  ) : (
-                    <GraduationCap className="w-5 h-5 text-primary" />
-                  )}
-                </div>
+                <span className="absolute -left-[calc(2rem+3.5px)] top-1.5 w-2 h-2 rounded-full bg-primary" />
+                <p className="label-mono mb-2">{role.period}</p>
+                <h3 className="text-xl font-medium">{role.title}</h3>
+                <p className="text-primary text-sm mt-0.5">{role.org}</p>
+                <p className="text-muted-foreground text-sm mt-3 leading-relaxed">
+                  {role.description}
+                </p>
+                <ul className="mt-4 space-y-1.5">
+                  {role.points.map((point) => (
+                    <li
+                      key={point}
+                      className="text-sm text-muted-foreground pl-4 relative before:content-['—'] before:absolute before:left-0 before:text-border"
+                    >
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
+            ))}
+          </div>
+        </div>
 
-              {/* Content Card */}
-              <div className={`w-full md:w-5/12 ml-20 md:ml-0 ${
-                index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
-              }`}>
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="glass-hover p-6"
-                >
-                  <span className="text-sm text-primary font-medium">{exp.period}</span>
-                  <h3 className="text-xl font-display font-semibold mt-2">{exp.title}</h3>
-                  <p className="text-muted-foreground mt-1">{exp.company}</p>
-                  <p className="text-sm text-muted-foreground mt-4">{exp.description}</p>
-                  
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {exp.achievements.map((achievement, i) => (
-                      <motion.span
-                        key={i}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ delay: 0.7 + index * 0.2 + i * 0.1 }}
-                        className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full"
-                      >
-                        {achievement}
-                      </motion.span>
-                    ))}
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid md:grid-cols-2 gap-16 mt-20 max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <p className="section-kicker">Education</p>
+            <div className="space-y-5">
+              {education.map((entry) => (
+                <div key={entry.school}>
+                  <p className="text-sm font-medium">{entry.school}</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">{entry.program}</p>
+                  <p className="label-mono mt-1">{entry.period}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.35 }}
+          >
+            <p className="section-kicker">Certifications</p>
+            <div className="space-y-5">
+              {certifications.map((cert) => (
+                <div key={cert.name}>
+                  <p className="text-sm font-medium">{cert.name}</p>
+                  <p className="text-sm text-muted-foreground mt-0.5">{cert.issuer}</p>
+                  <p className="label-mono mt-1">{cert.date}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

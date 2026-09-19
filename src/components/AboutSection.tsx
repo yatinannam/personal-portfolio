@@ -1,27 +1,22 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code2, Palette, Zap, Heart } from "lucide-react";
 
-const highlights = [
+const domains = [
   {
-    icon: Code2,
-    label: "Clean Code",
-    description: "Writing maintainable, scalable solutions",
+    name: "Full-Stack Engineering",
+    detail: "React, Next.js, TypeScript, Node.js on production systems",
   },
   {
-    icon: Palette,
-    label: "Creative Design",
-    description: "Crafting beautiful user experiences",
+    name: "AI / ML & RAG",
+    detail: "LangChain, local inference, schema-aware retrieval pipelines",
   },
   {
-    icon: Zap,
-    label: "Fast Delivery",
-    description: "Efficient and timely project completion",
+    name: "Cybersecurity",
+    detail: "Web & API security, OWASP, secure-by-default architecture",
   },
   {
-    icon: Heart,
-    label: "Passionate",
-    description: "Dedicated to continuous learning",
+    name: "Systems Programming",
+    detail: "x86-64 assembly, SIMD optimization, low-level performance work",
   },
 ];
 
@@ -30,126 +25,71 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="section relative">
-      <div className="container mx-auto" ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+    <section id="about" className="section">
+      <div className="section-inner" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="section-title"
+          transition={{ duration: 0.5 }}
         >
-          <span className="gradient-text">About Me</span>
-        </motion.h2>
+          <p className="section-kicker">About</p>
+          <h2 className="section-title">Range, applied deliberately</h2>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Profile Image */}
+        <div className="grid lg:grid-cols-[minmax(0,280px)_1fr] gap-16 items-start mt-12">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
-              {/* Animated border */}
-              <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-secondary p-1"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
-                <div className="w-full h-full rounded-full bg-background" />
-              </motion.div>
-
-              {/* Profile placeholder */}
-              <div className="absolute inset-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center overflow-hidden">
-                <img
-                  src="/profile.jpg"
-                  alt="Yatin Annam"
-                  className="w-full h-full object-cover rounded-full"
-                />
-              </div>
-
-              {/* Floating badges */}
-              <motion.div
-                className="absolute -top-4 -right-4 glass px-4 py-2 rounded-full"
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <span className="text-sm font-medium">1 Year Exp</span>
-              </motion.div>
-
-              <motion.div
-                className="absolute -bottom-4 -left-4 glass px-4 py-2 rounded-full"
-                animate={{ y: [5, -5, 5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <span className="text-sm font-medium">15+ Projects</span>
-              </motion.div>
+            <div className="aspect-square rounded-md border border-border overflow-hidden">
+              <img
+                src="/profile.jpg"
+                alt="Yatin Annam"
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
 
-          {/* Bio Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
+            initial={{ opacity: 0, y: 16 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="space-y-5 text-muted-foreground leading-relaxed"
           >
-            <h3 className="text-2xl md:text-3xl font-display font-semibold">
-              <span className="gradient-text">
-                Building. Breaking. Improving.
-              </span>
-            </h3>
-
-            <div className="space-y-4 text-muted-foreground">
-              <p>
-                I'm a full-stack developer and a cybersecurity student, with a
-                passion for creating beautiful, functional and user-centered
-                digital experiences.
-              </p>
-              <p>
-                Backed by 1+ year of experience, I bring expertise in designing,
-                developing, and optimizing applications with clean architecture,
-                modern technologies, and a focus on performance and usability.
-              </p>
-              <p>
-                When I'm not coding, you'll find me exploring new technologies,
-                contributing to open-source projects or enjoying a good cup of
-                coffee :)
-              </p>
-            </div>
+            <p>
+              I'm a Computer Science &amp; Cybersecurity student at SRM Institute
+              of Science and Technology, currently working as a full-stack
+              intern at EvoDoc, where I build clinical and hospital-administration
+              software used by real clinicians. I also lead the technical
+              direction of Founders Club, a student engineering team, where I
+              own architecture decisions, code review standards, and delivery
+              across several concurrent projects.
+            </p>
+            <p>
+              My work spans three layers most people keep separate: product
+              engineering (web apps people actually use), applied AI (RAG
+              pipelines and local LLM inference), and systems programming
+              (a CNN implemented in raw x86-64 assembly). I like understanding
+              how software behaves all the way down, and I bring that instinct
+              to the security and reliability of everything I ship.
+            </p>
           </motion.div>
         </div>
 
-        {/* Highlight Cards */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border mt-16 rounded-md overflow-hidden"
         >
-          {highlights.map((item, index) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="glass-hover p-6 text-center group"
-            >
-              <motion.div
-                className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center"
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.5 }}
-              >
-                <item.icon className="w-8 h-8 text-primary" />
-              </motion.div>
-              <h4 className="font-display font-semibold mb-2 group-hover:text-primary transition-colors">
-                {item.label}
-              </h4>
-              <p className="text-sm text-muted-foreground">
-                {item.description}
+          {domains.map((domain) => (
+            <div key={domain.name} className="bg-card p-6">
+              <h3 className="font-medium mb-2">{domain.name}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {domain.detail}
               </p>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
       </div>

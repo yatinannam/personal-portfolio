@@ -10,7 +10,6 @@ import {
   Download,
   Github,
   Linkedin,
-  Twitter,
   Loader2,
 } from "lucide-react";
 
@@ -24,14 +23,12 @@ const ContactSection = () => {
   });
   const [honeypot, setHoneypot] = useState(""); // Bot trap
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Honeypot check - if filled, it's a bot
     if (honeypot) {
-      console.log("Bot detected");
       return;
     }
 
@@ -51,17 +48,15 @@ const ContactSection = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
 
-      toast.success("Message sent successfully!", {
-        description: "Thanks for reaching out. I'll get back to you soon!",
+      toast.success("Message sent", {
+        description: "Thanks for reaching out. I'll get back to you soon.",
       });
 
-      // Reset form
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("EmailJS Error:", error);
       toast.error("Failed to send message", {
-        description:
-          "Please try again or email me directly at ninjayatin@gmail.com",
+        description: "Please try again or email me directly at ninjayatin@gmail.com",
       });
     } finally {
       setIsSubmitting(false);
@@ -86,134 +81,93 @@ const ContactSection = () => {
       label: "Location",
       value: "Bengaluru, Karnataka",
       href: "https://google.com/maps?q=Bengaluru,Karnataka",
-      target: "_blank",
-      rel: "noopener noreferrer",
     },
   ];
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/yatinannam", label: "GitHub" },
-    {
-      icon: Linkedin,
-      href: "https://linkedin.com/in/yatinannam",
-      label: "LinkedIn",
-    },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/yatinannam/", label: "LinkedIn" },
   ];
 
   return (
-    <section id="contact" className="section relative">
-      <div className="container mx-auto" ref={ref}>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+    <section id="contact" className="section">
+      <div className="section-inner" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="section-title"
+          transition={{ duration: 0.5 }}
         >
-          <span className="gradient-text">Get In Touch</span>
-        </motion.h2>
+          <p className="section-kicker">Contact</p>
+          <h2 className="section-title">Get in touch</h2>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 max-w-5xl mt-12">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -16 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-10"
           >
-            <div>
-              <h3 className="text-2xl font-display font-semibold mb-4">
-                Let's work together!
-              </h3>
-              <p className="text-muted-foreground">
-                I'm always open to discussing new projects, creative ideas, or
-                opportunities to be part of your vision. Feel free to reach out!
-              </p>
-            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              I'm open to internships, collaborations, and interesting
+              engineering problems. Reach out directly or use the form.
+            </p>
 
-            {/* Contact Details */}
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.a
+            <div className="space-y-5">
+              {contactInfo.map((info) => (
+                <a
                   key={info.label}
                   href={info.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ x: 10 }}
                   className="flex items-center gap-4 group"
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-colors"
-                  >
-                    <info.icon className="w-5 h-5 text-primary" />
-                  </motion.div>
+                  <div className="w-10 h-10 rounded-md border border-border flex items-center justify-center shrink-0 group-hover:border-primary/50 transition-colors">
+                    <info.icon className="w-4 h-4 text-primary" />
+                  </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">
-                      {info.label}
-                    </p>
-                    <p className="font-medium group-hover:text-primary transition-colors">
+                    <p className="label-mono">{info.label}</p>
+                    <p className="text-sm group-hover:text-primary transition-colors">
                       {info.value}
                     </p>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="pt-8 border-t border-border"
-            >
-              <p className="text-sm text-muted-foreground mb-4">Follow me on</p>
-              <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                    whileHover={{ scale: 1.2, y: -5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 glass-hover rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
+            <div className="flex items-center gap-4 pt-2">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="p-2.5 border border-border rounded-md text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
+                >
+                  <social.icon className="w-4 h-4" />
+                </a>
+              ))}
 
-            {/* Resume Download */}
-            <motion.a
-              href="/Yatin-Annam-Resume.pdf"
-              download
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary via-accent to-secondary rounded-full font-semibold text-primary-foreground pulse-glow"
-            >
-              <Download className="w-5 h-5" />
-              Download Resume
-            </motion.a>
+              <a
+                href="/Yatin-Annam-Resume.pdf"
+                download
+                className="flex items-center gap-2 px-5 py-2.5 border border-border rounded-md text-sm font-medium hover:border-primary/50 transition-colors ml-2"
+              >
+                <Download className="w-4 h-4" />
+                Résumé
+              </a>
+            </div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 16 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
           >
-            <form onSubmit={handleSubmit} className="glass p-8 space-y-6">
-              {/* Honeypot field - hidden from users, bots will fill it */}
+            <form onSubmit={handleSubmit} className="panel p-6 space-y-5">
               <input
                 type="text"
                 name="website"
@@ -223,117 +177,66 @@ const ContactSection = () => {
                 tabIndex={-1}
                 autoComplete="off"
               />
-              {/* Name Field */}
-              <div className="relative">
-                <motion.label
-                  animate={{
-                    y: focusedField === "name" || formData.name ? 0 : 16,
-                    scale: focusedField === "name" || formData.name ? 0.75 : 1,
-                    color:
-                      focusedField === "name"
-                        ? "hsl(var(--primary))"
-                        : "hsl(var(--muted-foreground))",
-                  }}
-                  className="absolute left-4 top-1 origin-left pointer-events-none z-10"
-                >
-                  Your Name
-                </motion.label>
+
+              <div>
+                <label htmlFor="name" className="label-mono block mb-2">
+                  Name
+                </label>
                 <input
+                  id="name"
                   type="text"
                   value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  onFocus={() => setFocusedField("name")}
-                  onBlur={() => setFocusedField(null)}
-                  className="w-full pt-7 pb-2 px-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors"
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-md text-sm focus:border-primary focus:outline-none transition-colors"
                   required
                 />
               </div>
 
-              {/* Email Field */}
-              <div className="relative">
-                <motion.label
-                  animate={{
-                    y: focusedField === "email" || formData.email ? 0 : 16,
-                    scale:
-                      focusedField === "email" || formData.email ? 0.75 : 1,
-                    color:
-                      focusedField === "email"
-                        ? "hsl(var(--primary))"
-                        : "hsl(var(--muted-foreground))",
-                  }}
-                  className="absolute left-4 top-1 origin-left pointer-events-none z-10"
-                >
-                  Your Email
-                </motion.label>
+              <div>
+                <label htmlFor="email" className="label-mono block mb-2">
+                  Email
+                </label>
                 <input
+                  id="email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  onFocus={() => setFocusedField("email")}
-                  onBlur={() => setFocusedField(null)}
-                  className="w-full pt-7 pb-2 px-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors"
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 bg-background border border-border rounded-md text-sm focus:border-primary focus:outline-none transition-colors"
                   required
                 />
               </div>
 
-              {/* Message Field */}
-              <div className="relative">
-                <motion.label
-                  animate={{
-                    y: focusedField === "message" || formData.message ? 0 : 16,
-                    scale:
-                      focusedField === "message" || formData.message ? 0.75 : 1,
-                    color:
-                      focusedField === "message"
-                        ? "hsl(var(--primary))"
-                        : "hsl(var(--muted-foreground))",
-                  }}
-                  className="absolute left-4 top-1 origin-left pointer-events-none z-10"
-                >
-                  Your Message
-                </motion.label>
+              <div>
+                <label htmlFor="message" className="label-mono block mb-2">
+                  Message
+                </label>
                 <textarea
+                  id="message"
                   value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  onFocus={() => setFocusedField("message")}
-                  onBlur={() => setFocusedField(null)}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={5}
-                  className="w-full pt-7 pb-2 px-4 bg-muted/50 border border-border rounded-xl focus:border-primary focus:outline-none transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-md text-sm focus:border-primary focus:outline-none transition-colors resize-none"
                   required
                 />
               </div>
 
-              {/* Submit Button */}
-              <motion.button
+              <button
                 type="submit"
                 disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className="w-full flex items-center justify-center gap-2 py-4 bg-primary text-primary-foreground rounded-xl font-semibold group disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center gap-2 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Sending...
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending
                   </>
                 ) : (
                   <>
-                    Send Message
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <Send className="w-5 h-5" />
-                    </motion.span>
+                    Send message
+                    <Send className="w-4 h-4" />
                   </>
                 )}
-              </motion.button>
+              </button>
             </form>
           </motion.div>
         </div>

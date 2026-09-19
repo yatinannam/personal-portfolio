@@ -1,97 +1,61 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Download, Github, Linkedin, Twitter } from "lucide-react";
-import FloatingShapes from "./FloatingShapes";
+import { motion } from "framer-motion";
+import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
+
+const statusRows = [
+  { label: "ROLE", value: "Full-Stack Intern, EvoDoc" },
+  { label: "LEAD", value: "Technical Lead, Founders Club" },
+  { label: "BASE", value: "Bengaluru, India" },
+  { label: "FOCUS", value: "Healthcare systems, AI/ML, security" },
+];
+
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 const HeroSection = () => {
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollIndicator(window.scrollY < 100);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const titleWords = ["Creative", "Developer"];
-
-  const scrollToAbout = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <section
       id="home"
-      className="section relative flex items-center justify-center min-h-screen"
+      className="relative flex items-center min-h-screen pt-16 px-4 md:px-8 lg:px-16"
     >
-      <FloatingShapes />
-
-      <div className="container mx-auto relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Greeting */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-primary font-medium mb-4 tracking-wider"
-          >
-            Hey there, I'm
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="container mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-16 items-center py-20"
+      >
+        <div>
+          <motion.p variants={item} className="label-mono mb-6">
+            Full-stack engineer &mdash; systems &amp; security
           </motion.p>
 
-          {/* Name */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6"
+            variants={item}
+            className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.05] mb-8"
           >
-            <span className="gradient-text glow-text">Yatin Annam</span>
+            Yatin Annam
           </motion.h1>
 
-          {/* Animated Title */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-4 mb-8"
-          >
-            {titleWords.map((word, index) => (
-              <motion.span
-                key={word}
-                initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.4 + index * 0.2,
-                  type: "spring",
-                  stiffness: 100,
-                }}
-                className="text-3xl md:text-5xl lg:text-6xl font-display font-light text-muted-foreground"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          {/* Description */}
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
+            variants={item}
+            className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed"
           >
-            I turn coffee into code and ideas into smooth digital experiences.
+            I build production software end to end &mdash; from clinical
+            workflows and AI-assisted developer tools to inference engines
+            written in raw assembly. Currently studying cybersecurity at SRM
+            and shipping healthcare software at EvoDoc.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-          >
-            <motion.a
+          <motion.div variants={item} className="flex flex-wrap items-center gap-4 mb-12">
+            <a
               href="#projects"
               onClick={(e) => {
                 e.preventDefault();
@@ -99,91 +63,73 @@ const HeroSection = () => {
                   .getElementById("projects")
                   ?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
             >
-              <span className="relative z-10">View My Work</span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-              />
-            </motion.a>
+              View my work
+            </a>
 
-            <motion.a
+            <a
               href="/Yatin-Annam-Resume.pdf"
               download
-              className="group flex items-center gap-2 px-8 py-4 border border-primary/50 text-foreground rounded-full font-semibold hover:border-primary transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 px-6 py-3 border border-border rounded-md text-sm font-medium hover:border-primary/50 transition-colors"
             >
-              <Download className="w-5 h-5 group-hover:animate-bounce-subtle" />
-              Download Resume
-            </motion.a>
+              <Download className="w-4 h-4" />
+              Résumé
+            </a>
           </motion.div>
 
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="flex items-center justify-center gap-6"
-          >
+          <motion.div variants={item} className="flex items-center gap-4">
             {[
-              {
-                icon: Github,
-                href: "https://github.com/yatinannam",
-                label: "GitHub",
-              },
-              {
-                icon: Linkedin,
-                href: "https://linkedin.com/in/yatinannam",
-                label: "LinkedIn",
-              },
-            ].map((social, index) => (
-              <motion.a
+              { icon: Github, href: "https://github.com/yatinannam", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/yatinannam/", label: "LinkedIn" },
+            ].map((social) => (
+              <a
                 key={social.label}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 glass-hover rounded-full text-muted-foreground hover:text-primary transition-colors"
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.3 + index * 0.1 }}
+                aria-label={social.label}
+                className="p-2.5 border border-border rounded-md text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors"
               >
-                <social.icon className="w-5 h-5" />
-              </motion.a>
+                <social.icon className="w-4 h-4" />
+              </a>
             ))}
           </motion.div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <AnimatePresence>
-        {showScrollIndicator && (
-          <motion.button
-            onClick={scrollToAbout}
-            className="absolute bottom-10 left-0 right-0 mx-auto w-fit"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-            >
-              <span className="text-sm">Scroll Down</span>
-              <ArrowDown className="w-5 h-5" />
-            </motion.div>
-          </motion.button>
-        )}
-      </AnimatePresence>
+        {/* Status panel */}
+        <motion.div variants={item} className="panel p-6">
+          <div className="flex items-center gap-2 mb-5 pb-5 border-b border-border">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="label-mono">Currently</span>
+          </div>
+          <dl className="space-y-4">
+            {statusRows.map((row) => (
+              <div key={row.label} className="flex gap-4">
+                <dt className="font-mono text-xs text-muted-foreground w-14 shrink-0 pt-0.5">
+                  {row.label}
+                </dt>
+                <dd className="text-sm text-foreground">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </motion.div>
+      </motion.div>
+
+      <motion.a
+        href="#about"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+      >
+        <span className="label-mono">Scroll</span>
+        <ArrowDown className="w-4 h-4" />
+      </motion.a>
     </section>
   );
 };

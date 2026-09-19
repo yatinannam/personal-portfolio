@@ -1,19 +1,32 @@
-import { motion } from "framer-motion";
+import { Github, Linkedin, Mail } from "lucide-react";
+
+const links = [
+  { icon: Github, href: "https://github.com/yatinannam", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/yatinannam/", label: "LinkedIn" },
+  { icon: Mail, href: "mailto:ninjayatin@gmail.com", label: "Email" },
+];
 
 const Footer = () => {
   return (
-    <footer className="py-8 border-t border-border">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col md:flex-row items-center justify-center gap-4"
-        >
-          <p className="text-muted-foreground text-sm justify-center">
-            © {new Date().getFullYear()} Yatin Annam. All rights reserved.
-          </p>
-        </motion.div>
+    <footer className="border-t border-border py-8 px-4 md:px-8">
+      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="label-mono">
+          © {new Date().getFullYear()} Yatin Annam
+        </p>
+        <div className="flex items-center gap-3">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="p-2 text-muted-foreground hover:text-primary transition-colors"
+            >
+              <link.icon className="w-4 h-4" />
+            </a>
+          ))}
+        </div>
       </div>
     </footer>
   );
