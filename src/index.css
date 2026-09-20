@@ -48,6 +48,10 @@
     --input: 220 10% 18%;
     --ring: 38 52% 54%;
 
+    /* Section kickers and mono meta (dates, status rows) - brass, matches primary */
+    --kicker-color: 38 52% 54%;
+    --meta-color: 42 10% 60%;
+
     --radius: 0.375rem;
 
     --sidebar-background: 220 13% 9%;
@@ -61,43 +65,48 @@
   }
 
   .light {
-    --background: 41 35% 93%;
-    --foreground: 37 14% 11%;
+    /* "Warm Manuscript" - darker warmer paper, forest for actions, rust for labels */
+    --background: 42 12% 88%;
+    --foreground: 40 15% 12%;
 
-    --card: 41 30% 91%;
-    --card-foreground: 37 14% 11%;
+    --card: 42 14% 85%;
+    --card-foreground: 40 15% 12%;
 
-    --popover: 41 30% 91%;
-    --popover-foreground: 37 14% 11%;
+    --popover: 42 14% 85%;
+    --popover-foreground: 40 15% 12%;
 
-    /* Forest accent */
+    /* Forest accent - buttons, links, focus */
     --primary: 142 24% 24%;
-    --primary-foreground: 41 35% 96%;
+    --primary-foreground: 42 30% 95%;
 
-    /* Rust, used sparingly for secondary marks */
+    /* Rust - the second, visibly distinct accent */
     --secondary: 15 54% 40%;
-    --secondary-foreground: 41 35% 96%;
+    --secondary-foreground: 42 30% 95%;
 
-    --muted: 41 20% 87%;
-    --muted-foreground: 37 10% 40%;
+    --muted: 42 16% 82%;
+    --muted-foreground: 40 8% 38%;
 
-    --accent: 41 25% 88%;
-    --accent-foreground: 37 14% 11%;
+    --accent: 42 16% 83%;
+    --accent-foreground: 40 15% 12%;
 
-    --destructive: 6 55% 40%;
-    --destructive-foreground: 41 35% 96%;
+    --destructive: 6 55% 38%;
+    --destructive-foreground: 42 30% 96%;
 
-    --border: 42 15% 81%;
-    --input: 42 15% 81%;
+    --border: 42 21% 78%;
+    --input: 42 21% 78%;
     --ring: 142 24% 24%;
 
-    --sidebar-background: 41 35% 93%;
-    --sidebar-foreground: 37 14% 11%;
+    /* Rust does the labeling work here, forest is reserved for actions */
+    --kicker-color: 15 54% 40%;
+    --meta-color: 15 54% 40%;
+
+    --sidebar-background: 42 12% 88%;
+    --sidebar-foreground: 40 15% 12%;
     --sidebar-primary: 142 24% 24%;
-    --sidebar-primary-foreground: 41 35% 96%;
-    --sidebar-accent: 41 20% 87%;
-    --sidebar-accent-foreground: 37 14% 11%;
-    --sidebar-border: 42 15% 81%;
+    --sidebar-primary-foreground: 42 30% 95%;
+    --sidebar-accent: 42 16% 82%;
+    --sidebar-accent-foreground: 40 15% 12%;
+    --sidebar-border: 42 21% 78%;
     --sidebar-ring: 142 24% 24%;
   }
 }
@@ -170,12 +179,14 @@
   }
 
   .section-kicker {
-    @apply font-mono text-xs text-primary tracking-wide mb-4;
+    @apply font-mono text-xs tracking-wide mb-4;
+    color: hsl(var(--kicker-color));
   }
 
-  /* Mono data labels - dates, tags, meta */
+  /* Mono data labels - dates, status rows, meta */
   .label-mono {
-    @apply font-mono text-xs text-muted-foreground;
+    @apply font-mono text-xs;
+    color: hsl(var(--meta-color));
   }
 
   /* Bordered tag/pill, used for tech stacks and skills */

@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
 
 const statusRows = [
@@ -21,6 +22,14 @@ const item = {
 };
 
 const HeroSection = () => {
+  const [showScrollHint, setShowScrollHint] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollHint(window.scrollY < 100);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section
       id="home"
@@ -106,7 +115,7 @@ const HeroSection = () => {
           <dl className="space-y-4">
             {statusRows.map((row) => (
               <div key={row.label} className="flex gap-4">
-                <dt className="font-mono text-xs text-muted-foreground w-14 shrink-0 pt-0.5">
+                <dt className="label-mono w-14 shrink-0 pt-0.5">
                   {row.label}
                 </dt>
                 <dd className="text-sm text-foreground">{row.value}</dd>
@@ -116,20 +125,29 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      <motion.a
-        href="#about"
-        onClick={(e) => {
-          e.preventDefault();
-          document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-        }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-      >
-        <span className="label-mono">Scroll</span>
-        <ArrowDown className="w-4 h-4" />
-      </motion.a>
+      <AnimatePresence>
+        {showScrollHint && (
+          <motion.a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0, transition: { delay: 1, duration: 0.5 } }}
+            exit={{ opacity: 0, y: 8, transition: { duration: 0.25 } }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+          >
+            <span className="label-mono">Scroll</span>
+            <motion.span
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ArrowDown className="w-4 h-4" />
+            </motion.span>
+          </motion.a>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

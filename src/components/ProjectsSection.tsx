@@ -1,13 +1,25 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { ExternalLink, Github } from "lucide-react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { ExternalLink, Github, X } from "lucide-react";
 
-const projects = [
+interface Project {
+  slug: string;
+  title: string;
+  period: string;
+  tagline: string;
+  points: string[];
+  tech: string[];
+  github?: string;
+  live?: string;
+}
+
+const projects: Project[] = [
   {
+    slug: "cross-cutting",
     title: "Cross-Cutting",
     period: "2026",
-    description:
-      "An in-house HealthTech platform built for SRM Hospital, enabling clinicians to manage patients and conduct structured digital assessments.",
+    tagline:
+      "An in-house HealthTech platform for SRM Hospital, letting clinicians manage patients and run structured digital assessments.",
     points: [
       "End-to-end clinical workflows for DSM-5 mental-health screening and decision-capacity assessment",
       "Scoring logic, session tracking, clinical notes, and authenticated dashboards",
@@ -18,10 +30,11 @@ const projects = [
     live: "https://cross-cutting.vercel.app",
   },
   {
+    slug: "dbguree",
     title: "DBGuree",
     period: "2026",
-    description:
-      "A desktop AI-powered SQL workbench that translates natural-language queries into executable SQL against real databases.",
+    tagline:
+      "A desktop AI-powered SQL workbench that turns natural-language queries into executable SQL against real databases.",
     points: [
       "Schema-aware RAG pipeline with ChromaDB and llama.cpp for local LLM inference",
       "SQL parsing, validation, persistent query history, and secure credential management",
@@ -29,13 +42,13 @@ const projects = [
     ],
     tech: ["Electron", "Python", "FastAPI", "LangChain", "Qwen2.5-Coder"],
     github: "https://github.com/saurovpaul16/dbguree",
-    live: undefined as string | undefined,
   },
   {
+    slug: "x86-64cnn",
     title: "x86-64CNN",
     period: "2026",
-    description:
-      "A convolutional neural network implemented from scratch in x86-64 assembly for MNIST inference, without any high-level ML framework.",
+    tagline:
+      "A convolutional neural network built from scratch in x86-64 assembly for MNIST inference, no ML framework involved.",
     points: [
       "AVX2/FMA SIMD-optimized convolution, ReLU, pooling, and dense layers",
       "Custom memory management and matrix multiplication kernels",
@@ -43,13 +56,124 @@ const projects = [
     ],
     tech: ["x86-64 Assembly", "NASM", "AVX2/FMA", "Linux"],
     github: "https://github.com/nkminion/x86-64CNN",
-    live: undefined as string | undefined,
+  },
+  {
+    slug: "risklattice",
+    title: "RiskLattice",
+    period: "2026",
+    tagline:
+      "Fraud-containment intelligence that finds the minimal action to stop coordinated fraud without harming real customers.",
+    points: [
+      "A relationship graph links users, devices, payment instruments, and IPs to surface coordinated campaigns, not just risky transactions",
+      "A containment optimizer simulates allow/review/block actions against the full dataset to bound collateral damage before anything is applied",
+      "A reporting layer drafts investigation notes grounded only in structured evidence, and never executes an action autonomously",
+    ],
+    tech: ["Python", "Pydantic", "Logistic Regression", "Random Forest"],
+    github: "https://github.com/yatinannam/RiskLattice",
+  },
+  {
+    slug: "sentinel-ai",
+    title: "Sentinel-AI",
+    period: "2026",
+    tagline:
+      "A Windows endpoint detection and response app with real-time monitoring and ML-based threat classification.",
+    points: [
+      "Real-time monitoring of processes, network connections, the file system, and the registry",
+      "YARA pattern matching combined with a behavioral ML model for confidence-scored classification",
+      "Optional VirusTotal verification alongside a fully local detection and quarantine path",
+    ],
+    tech: ["Electron", "React", "Python", "scikit-learn", "YARA"],
+    github: "https://github.com/yatinannam/Sentinel-AI",
+  },
+  {
+    slug: "devpulse",
+    title: "devpulse",
+    period: "2026",
+    tagline:
+      "A local development observability CLI that shows what's running and what's receiving traffic, with no external infrastructure.",
+    points: [
+      "A local reverse proxy captures live HTTP traffic between services as it happens",
+      "Cross-platform socket inspection discovers what's actually listening, correlated against captured traffic",
+      "Local-first by design: session data stays on the machine unless explicitly moved",
+    ],
+    tech: ["Go", "CLI", "TUI"],
+    github: "https://github.com/yatinannam/devpulse",
+  },
+  {
+    slug: "loreloom",
+    title: "loreloom",
+    period: "2026",
+    tagline:
+      "A choice-driven narrative game with a deterministic, offline-first engine — weave a character, discover their story.",
+    points: [
+      "A seven-chapter story tracks hidden stats and personality axes that shift with player choices",
+      "A deterministic engine with a seeded PRNG means replays are identical and no backend is required",
+      "Runs fully offline as an installable PWA; Claude only enhances two prose fields on the final result",
+    ],
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/yatinannam/loreloom",
   },
 ];
+
+const ProjectCard = ({
+  project,
+  index,
+  isInView,
+  onOpen,
+}: {
+  project: Project;
+  index: number;
+  isInView: boolean;
+  onOpen: () => void;
+}) => (
+  <motion.button
+    layoutId={`project-${project.slug}`}
+    initial={{ opacity: 0, y: 16 }}
+    animate={isInView ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.5, delay: index * 0.06 }}
+    onClick={onOpen}
+    className="panel-hover text-left p-6 flex flex-col h-full"
+  >
+    <div className="flex items-start justify-between mb-3">
+      <h3 className="text-lg font-medium">{project.title}</h3>
+      <span className="label-mono pt-1">{project.period}</span>
+    </div>
+
+    <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
+      {project.tagline}
+    </p>
+
+    <div className="flex flex-wrap gap-2">
+      {project.tech.slice(0, 3).map((tech) => (
+        <span key={tech} className="chip">
+          {tech}
+        </span>
+      ))}
+      {project.tech.length > 3 && (
+        <span className="chip">+{project.tech.length - 3}</span>
+      )}
+    </div>
+  </motion.button>
+);
 
 const ProjectsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+  const activeProject = projects.find((p) => p.slug === openSlug) ?? null;
+
+  useEffect(() => {
+    document.body.style.overflow = openSlug ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openSlug]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenSlug(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   return (
     <section id="projects" className="section">
@@ -63,77 +187,102 @@ const ProjectsSection = () => {
           <h2 className="section-title">Projects</h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-px bg-border mt-12 rounded-md overflow-hidden">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
-              className="bg-card p-6 flex flex-col"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <h3 className="text-lg font-medium">{project.title}</h3>
-                <span className="label-mono pt-1">{project.period}</span>
-              </div>
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              index={index}
+              isInView={isInView}
+              onOpen={() => setOpenSlug(project.slug)}
+            />
+          ))}
+        </div>
+      </div>
 
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                {project.description}
+      <AnimatePresence>
+        {activeProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80"
+            onClick={() => setOpenSlug(null)}
+          >
+            <motion.div
+              layoutId={`project-${activeProject.slug}`}
+              onClick={(e) => e.stopPropagation()}
+              className="panel p-8 max-w-xl w-full max-h-[85vh] overflow-y-auto"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="text-2xl font-semibold">{activeProject.title}</h3>
+                <button
+                  onClick={() => setOpenSlug(null)}
+                  aria-label="Close"
+                  className="p-1.5 -mt-1 -mr-1.5 text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <p className="label-mono mb-6">{activeProject.period}</p>
+
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                {activeProject.tagline}
               </p>
 
-              <ul className="space-y-1.5 mb-5 flex-1">
-                {project.points.map((point) => (
+              <ul className="space-y-2.5 mb-6">
+                {activeProject.points.map((point) => (
                   <li
                     key={point}
-                    className="text-xs text-muted-foreground pl-3.5 relative before:content-['—'] before:absolute before:left-0 before:text-border"
+                    className="text-sm text-muted-foreground pl-4 relative before:content-['\2014'] before:absolute before:left-0 before:text-border"
                   >
                     {point}
                   </li>
                 ))}
               </ul>
 
-              <div className="flex flex-wrap gap-2 mb-5">
-                {project.tech.map((tech) => (
+              <div className="flex flex-wrap gap-2 mb-6">
+                {activeProject.tech.map((tech) => (
                   <span key={tech} className="chip">
                     {tech}
                   </span>
                 ))}
               </div>
 
-              {(project.github || project.live) ? (
-                <div className="flex gap-4 pt-4 border-t border-border">
-                  {project.github && (
+              {(activeProject.github || activeProject.live) ? (
+                <div className="flex gap-4 pt-6 border-t border-border">
+                  {activeProject.github && (
                     <a
-                      href={project.github}
+                      href={activeProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+                      className="flex items-center gap-2 px-5 py-2.5 border border-border rounded-md text-sm font-medium hover:border-primary/50 transition-colors"
                     >
-                      <Github className="w-3.5 h-3.5" />
+                      <Github className="w-4 h-4" />
                       Source
                     </a>
                   )}
-                  {project.live && (
+                  {activeProject.live && (
                     <a
-                      href={project.live}
+                      href={activeProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors"
                     >
-                      <ExternalLink className="w-3.5 h-3.5" />
+                      <ExternalLink className="w-4 h-4" />
                       Live
                     </a>
                   )}
                 </div>
               ) : (
-                <p className="label-mono pt-4 border-t border-border">
+                <p className="label-mono pt-6 border-t border-border">
                   Private repository
                 </p>
               )}
             </motion.div>
-          ))}
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

@@ -4,19 +4,19 @@ import { useRef } from "react";
 const domains = [
   {
     name: "Full-Stack Engineering",
-    detail: "React, Next.js, TypeScript, Node.js on production systems",
+    detail: "Production apps at EvoDoc and Cross-Cutting, built end to end",
   },
   {
-    name: "AI / ML & RAG",
-    detail: "LangChain, local inference, schema-aware retrieval pipelines",
+    name: "AI / ML",
+    detail: "RAG pipelines in DBGuree, graph-based fraud detection in RiskLattice",
   },
   {
     name: "Cybersecurity",
-    detail: "Web & API security, OWASP, secure-by-default architecture",
+    detail: "Endpoint detection in Sentinel-AI, OWASP-aligned web security",
   },
   {
     name: "Systems Programming",
-    detail: "x86-64 assembly, SIMD optimization, low-level performance work",
+    detail: "A CNN in raw x86-64 assembly, SIMD-optimized from scratch",
   },
 ];
 
@@ -67,12 +67,21 @@ const AboutSection = () => {
               across several concurrent projects.
             </p>
             <p>
-              My work spans three layers most people keep separate: product
-              engineering (web apps people actually use), applied AI (RAG
-              pipelines and local LLM inference), and systems programming
-              (a CNN implemented in raw x86-64 assembly). I like understanding
-              how software behaves all the way down, and I bring that instinct
-              to the security and reliability of everything I ship.
+              Outside of work I build things nobody assigned me: a fraud-graph
+              engine that reasons about coordinated attacks instead of scoring
+              transactions one at a time, an endpoint-detection app that
+              classifies threats locally, a CLI that watches what my own dev
+              environment is doing, and a narrative game with a fully
+              offline, deterministic engine. Most of it starts from wanting to
+              understand a system well enough to rebuild a piece of it myself
+              &mdash; which is also why I ended up writing a CNN in raw
+              assembly instead of just calling a library.
+            </p>
+            <p>
+              That instinct carries into how I ship production work too:
+              I care about security and correctness by default, not as an
+              afterthought, and I'd rather read the RFC or the source than
+              take a library's behavior on faith.
             </p>
           </motion.div>
         </div>
