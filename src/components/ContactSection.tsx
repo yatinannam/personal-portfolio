@@ -165,7 +165,7 @@ const ContactSection = () => {
                 className="flex items-center gap-2 px-5 py-2.5 border border-border rounded-md text-sm font-medium hover:border-primary/50 transition-colors ml-2"
               >
                 <Download className="w-4 h-4" />
-                Résumé
+                Resumé
               </a>
             </div>
           </motion.div>

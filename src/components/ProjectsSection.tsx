@@ -162,12 +162,22 @@ const ProjectsSection = () => {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const activeProject = projects.find((p) => p.slug === openSlug) ?? null;
 
+  // Lock scroll while a project is open. Unlocking happens in onExitComplete
+  // below, once the closing morph animation has actually finished - clearing
+  // it as soon as openSlug changes would bring the scrollbar back mid-close,
+  // shift the layout, and throw off the shared layoutId transform back to
+  // the card (this was making the close animation look broken).
   useEffect(() => {
-    document.body.style.overflow = openSlug ? "hidden" : "";
+    if (openSlug) {
+      document.body.style.overflow = "hidden";
+    }
+  }, [openSlug]);
+
+  useEffect(() => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [openSlug]);
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpenSlug(null);
@@ -200,7 +210,7 @@ const ProjectsSection = () => {
         </div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={() => { document.body.style.overflow = ""; }}>
         {activeProject && (
           <motion.div
             initial={{ opacity: 0 }}
