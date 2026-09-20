@@ -32,7 +32,21 @@ const ContactSection = () => {
       return;
     }
 
-    setIsSubmitting(true);
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.error(
+        "EmailJS env vars are missing at build time (VITE_EMAILJS_SERVICE_ID / VITE_EMAILJS_TEMPLATE_ID / VITE_EMAILJS_PUBLIC_KEY). " +
+          "On Vercel these must be set in Project Settings → Environment Variables, not just in a local .env file.",
+      );
+      toast.error("Message service unavailable", {
+        description: "Please email me directly at ninjayatin@gmail.com",
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const templateParams = {
@@ -41,12 +55,7 @@ const ContactSection = () => {
         message: formData.message,
       };
 
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        templateParams,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-      );
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       toast.success("Message sent", {
         description: "Thanks for reaching out. I'll get back to you soon.",

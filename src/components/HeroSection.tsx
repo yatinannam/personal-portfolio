@@ -23,9 +23,14 @@ const item = {
 
 const HeroSection = () => {
   const [showScrollHint, setShowScrollHint] = useState(true);
+  const [hasScrolledOnce, setHasScrolledOnce] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setShowScrollHint(window.scrollY < 100);
+    const handleScroll = () => {
+      const atTop = window.scrollY < 100;
+      setShowScrollHint(atTop);
+      if (!atTop) setHasScrolledOnce(true);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -134,7 +139,11 @@ const HeroSection = () => {
               document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
             }}
             initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0, transition: { delay: 1, duration: 0.5 } }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: hasScrolledOnce ? { duration: 0.25 } : { delay: 1, duration: 0.5 },
+            }}
             exit={{ opacity: 0, y: 8, transition: { duration: 0.25 } }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
           >
