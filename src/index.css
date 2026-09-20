@@ -8,7 +8,7 @@
    Two curated themes, switched by adding .light or .dark to <html>.
 
    .dark  "Instrument Panel" - graphite base, brass accent, no gradients, no glow.
-   .light "Field Notes"      - paper base, forest accent, hairline rules, no shadows.
+   .light "Cream Paper"      - eggshell base, forest accent, hairline rules, no shadows.
 
    Sans carries voice (headlines, body); mono carries data (dates, tags, labels).
    :root holds the dark values as a fallback so there's no unstyled flash
@@ -52,6 +52,9 @@
     --kicker-color: 38 52% 54%;
     --meta-color: 42 10% 60%;
 
+    /* Fixed background grid texture */
+    --grid-color: 38 52% 54%;
+
     --radius: 0.375rem;
 
     --sidebar-background: 220 13% 9%;
@@ -65,48 +68,51 @@
   }
 
   .light {
-    /* "Warm Manuscript" - darker warmer paper, forest for actions, rust for labels */
-    --background: 42 12% 88%;
-    --foreground: 40 15% 12%;
+    /* "Cream Paper" - warm eggshell cream, forest for actions, rust for labels */
+    --background: 40 42% 91%;
+    --foreground: 28 24% 13%;
 
-    --card: 42 14% 85%;
-    --card-foreground: 40 15% 12%;
+    --card: 38 34% 86%;
+    --card-foreground: 28 24% 13%;
 
-    --popover: 42 14% 85%;
-    --popover-foreground: 40 15% 12%;
+    --popover: 38 34% 86%;
+    --popover-foreground: 28 24% 13%;
 
     /* Forest accent - buttons, links, focus */
     --primary: 142 24% 24%;
-    --primary-foreground: 42 30% 95%;
+    --primary-foreground: 40 42% 96%;
 
     /* Rust - the second, visibly distinct accent */
     --secondary: 15 54% 40%;
-    --secondary-foreground: 42 30% 95%;
+    --secondary-foreground: 40 42% 96%;
 
-    --muted: 42 16% 82%;
-    --muted-foreground: 40 8% 38%;
+    --muted: 38 30% 84%;
+    --muted-foreground: 30 14% 38%;
 
-    --accent: 42 16% 83%;
-    --accent-foreground: 40 15% 12%;
+    --accent: 38 30% 85%;
+    --accent-foreground: 28 24% 13%;
 
     --destructive: 6 55% 38%;
-    --destructive-foreground: 42 30% 96%;
+    --destructive-foreground: 40 42% 96%;
 
-    --border: 42 21% 78%;
-    --input: 42 21% 78%;
+    --border: 36 26% 74%;
+    --input: 36 26% 74%;
     --ring: 142 24% 24%;
 
     /* Rust does the labeling work here, forest is reserved for actions */
     --kicker-color: 15 54% 40%;
     --meta-color: 15 54% 40%;
 
-    --sidebar-background: 42 12% 88%;
-    --sidebar-foreground: 40 15% 12%;
+    /* Ink, not the accent - a graph-paper texture rather than a green tint */
+    --grid-color: 28 24% 13%;
+
+    --sidebar-background: 40 42% 91%;
+    --sidebar-foreground: 28 24% 13%;
     --sidebar-primary: 142 24% 24%;
-    --sidebar-primary-foreground: 42 30% 95%;
-    --sidebar-accent: 42 16% 82%;
-    --sidebar-accent-foreground: 40 15% 12%;
-    --sidebar-border: 42 21% 78%;
+    --sidebar-primary-foreground: 40 42% 96%;
+    --sidebar-accent: 38 30% 84%;
+    --sidebar-accent-foreground: 28 24% 13%;
+    --sidebar-border: 36 26% 74%;
     --sidebar-ring: 142 24% 24%;
   }
 }

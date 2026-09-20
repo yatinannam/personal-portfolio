@@ -13,11 +13,11 @@ const Index = () => {
     <div className="relative min-h-screen">
       {/* Fixed technical grid backdrop */}
       <div
-        className="fixed inset-0 -z-10 opacity-[0.035]"
+        className="fixed inset-0 -z-10 opacity-[0.045]"
         style={{
           backgroundImage: `
-            linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)
+            linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px)
           `,
           backgroundSize: "64px 64px",
         }}
