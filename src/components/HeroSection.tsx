@@ -44,7 +44,7 @@ const HeroSection = () => {
         variants={container}
         initial="hidden"
         animate="show"
-        className="container mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-16 items-center py-20"
+        className="mx-auto max-w-6xl grid lg:grid-cols-[1.4fr_1fr] gap-16 items-center py-20"
       >
         <div>
           <motion.p variants={item} className="label-mono mb-6">

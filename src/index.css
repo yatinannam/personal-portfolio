@@ -177,7 +177,7 @@
   }
 
   .section-inner {
-    @apply container mx-auto max-w-6xl;
+    @apply mx-auto max-w-6xl;
   }
 
   .section-title {

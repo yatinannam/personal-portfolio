@@ -216,13 +216,13 @@ const ProjectsSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80"
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-background/80"
             onClick={() => setOpenSlug(null)}
           >
             <motion.div
               layoutId={`project-${activeProject.slug}`}
               onClick={(e) => e.stopPropagation()}
-              className="panel p-8 max-w-xl w-full max-h-[85vh] overflow-y-auto"
+              className="panel p-6 sm:p-8 max-w-xl w-full max-h-[85vh] overflow-y-auto"
             >
               <div className="flex items-start justify-between mb-2">
                 <h3 className="text-2xl font-semibold">{activeProject.title}</h3>

@@ -49,11 +49,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b transition-colors duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b transition-colors duration-300 ${
           scrolled ? "border-border" : "border-transparent"
         }`}
       >
-        <div className="container mx-auto px-4 md:px-8">
+        <div className="mx-auto max-w-6xl px-4 md:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Nameplate */}
             <a
@@ -118,7 +118,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-background md:hidden"
+            className="fixed inset-0 z-50 bg-background md:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link) => (
