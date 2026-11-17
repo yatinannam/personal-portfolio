@@ -28,7 +28,7 @@ const experience = [
   {
     title: "Technical Lead",
     org: "Founders Club",
-    period: "Mar 2025 — Present",
+    period: "Mar 2025 — Nov 2026",
     description:
       "Leading the technical direction of a multi-project engineering team, from architecture to production delivery.",
     points: [
