@@ -25,6 +25,18 @@ const experience = [
       "Translating hospital processes into scalable software",
     ],
   },
+  {
+    title: "Technical Lead",
+    org: "Founders Club",
+    period: "Mar 2025 — Present",
+    description:
+      "Leading the technical direction of a multi-project engineering team, from architecture to production delivery.",
+    points: [
+      "Architecture, code review, and Git workflow standards",
+      "Mentoring developers on full-stack practices and code quality",
+      "Delivery across the club's software ecosystem",
+    ],
+  },
 ];
 
 const education = [
