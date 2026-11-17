@@ -3,27 +3,26 @@ import { useRef } from "react";
 
 const experience = [
   {
+    title: "Technical Intern",
+    org: "Siemens",
+    period: "Nov 2026 — Present",
+    description:
+      "Building automation with Asia Pacific regional teams to take manual, repetitive work out of day-to-day operations.",
+    points: [
+      "Working with APAC teams to understand business processes and deliver software-driven solutions",
+      "Automating manual workflows to cut the number of steps involved",
+    ],
+  },
+  {
     title: "Full Stack Intern",
     org: "EvoDoc",
     period: "May 2026 — Present",
     description:
-      "Contributing to hospital management and clinical information systems, building digital workflows across OPD, patient management, and hospital administration.",
+      "Digitizing hospital workflows across OPD, patient management, and clinical operations for live healthcare use.",
     points: [
       "Full-stack features for production healthcare applications",
-      "Next.js, React, TypeScript, Supabase, and database workflows",
+      "Next.js, React, TypeScript, Supabase, REST APIs, and AWS",
       "Translating hospital processes into scalable software",
-    ],
-  },
-  {
-    title: "Technical Lead",
-    org: "Founders Club",
-    period: "Mar 2025 — Present",
-    description:
-      "Leading the technical direction of a multi-project engineering team, from architecture to production delivery.",
-    points: [
-      "Architecture, code review, and Git workflow standards",
-      "Mentoring developers on full-stack practices and code quality",
-      "Delivery across the club's software ecosystem",
     ],
   },
 ];
@@ -32,7 +31,7 @@ const education = [
   {
     school: "SRM Institute of Science and Technology, Chennai",
     program: "B.Tech, Computer Science Engineering (Cybersecurity)",
-    period: "Aug 2024 — May 2028",
+    period: "Aug 2024 — May 2028 · CGPA 9.49",
   },
   {
     school: "Sri Chaitanya Techno School",

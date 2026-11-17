@@ -4,19 +4,19 @@ import { useRef } from "react";
 const domains = [
   {
     name: "Full-Stack Engineering",
-    detail: "Production apps at EvoDoc and Cross-Cutting, built end to end",
+    detail: "Production hospital software at EvoDoc, and Cross-Cutting for SRM Hospital",
   },
   {
-    name: "AI / ML",
-    detail: "RAG pipelines in DBGuree, graph-based fraud detection in RiskLattice",
+    name: "AI Systems",
+    detail: "A cost-aware LLM gateway in Weir, GraphRAG in Loom, voice-agent testing in Parakh",
   },
   {
-    name: "Cybersecurity",
-    detail: "Endpoint detection in Sentinel-AI, OWASP-aligned web security",
+    name: "Security",
+    detail: "Permission-aware retrieval in Veyl, endpoint detection in Sentinel-AI",
   },
   {
-    name: "Systems Programming",
-    detail: "A CNN in raw x86-64 assembly, SIMD-optimized from scratch",
+    name: "Systems & Tooling",
+    detail: "A Go observability CLI in devpulse, a CNN in raw x86-64 assembly",
   },
 ];
 
@@ -58,13 +58,14 @@ const AboutSection = () => {
             className="text-muted-foreground leading-relaxed"
           >
             <p>
-              I'm a Computer Science &amp; Cybersecurity student at SRM,
-              currently building healthcare software as a full-stack intern
-              at EvoDoc and leading engineering at Founders Club. Outside of
-              that, I build things nobody assigned me &mdash; a few of them
-              are below. I like understanding a system well enough to rebuild
-              a piece of it myself, and I bring that same instinct, plus a
-              security-first habit, to everything I ship.
+              I'm a third-year Computer Science &amp; Cybersecurity student
+              at SRM. Right now I'm a technical intern at Siemens, building
+              automation with Asia Pacific teams, and a full-stack intern at
+              EvoDoc, shipping hospital software. Outside of that, I build
+              things nobody assigned me &mdash; a few of them are below. I
+              like measuring what I build (cost, latency, test coverage)
+              instead of assuming it works, and I bring a security-first habit
+              to everything I ship.
             </p>
           </motion.div>
         </div>
