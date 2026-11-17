@@ -4,19 +4,27 @@ import { useRef } from "react";
 const skillGroups = [
   {
     name: "Languages",
-    skills: ["Python", "Java", "C++", "JavaScript", "TypeScript", "SQL"],
+    skills: ["Python", "Java", "C++", "JavaScript", "TypeScript", "Go", "SQL"],
   },
   {
-    name: "Web Development",
-    skills: ["React.js", "Next.js", "Node.js", "Express.js", "REST APIs", "Tailwind CSS"],
+    name: "Web & Backend",
+    skills: ["React", "Next.js", "Node.js", "Express.js", "FastAPI", "REST APIs", "Tailwind CSS"],
+  },
+  {
+    name: "Data",
+    skills: ["PostgreSQL", "pgvector", "Supabase", "Neo4j", "ChromaDB", "Redis"],
   },
   {
     name: "AI / ML",
-    skills: ["Machine Learning", "Generative AI", "LLMs", "RAG", "LangChain", "CNNs", "Scikit-learn"],
+    skills: ["LLMs", "RAG", "GraphRAG", "Embeddings", "Semantic Caching", "Voice AI (STT/TTS)", "Scikit-learn"],
   },
   {
-    name: "Cybersecurity & Systems",
-    skills: ["Web Security", "OWASP", "API Security", "Linux", "Docker", "Git/GitHub", "x86-64 Assembly"],
+    name: "Cloud & DevOps",
+    skills: ["AWS", "Docker", "GitHub Actions", "Prometheus", "Grafana", "Linux", "Git"],
+  },
+  {
+    name: "Security & Fundamentals",
+    skills: ["OWASP", "Row-Level Security", "API Security", "DSA", "OOP", "DBMS", "Operating Systems", "Networks"],
   },
 ];
 
@@ -36,7 +44,7 @@ const SkillsSection = () => {
           <h2 className="section-title">What I work with</h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
           {skillGroups.map((group, index) => (
             <motion.div
               key={group.name}

@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
 
 const statusRows = [
-  { label: "ROLE", value: "Full-Stack Intern, EvoDoc" },
-  { label: "LEAD", value: "Technical Lead, Founders Club" },
+  { label: "NOW", value: "Technical Intern, Siemens" },
+  { label: "ALSO", value: "Full-Stack Intern, EvoDoc" },
+  { label: "STUDY", value: "B.Tech CSE (Cybersecurity), SRM · CGPA 9.49" },
   { label: "BASE", value: "Bengaluru, India" },
-  { label: "FOCUS", value: "Healthcare systems, AI/ML, security" },
+  { label: "FOCUS", value: "LLM systems, healthcare software, security" },
 ];
 
 const container = {
@@ -48,7 +49,7 @@ const HeroSection = () => {
       >
         <div>
           <motion.p variants={item} className="label-mono mb-6">
-            Full-stack engineer &mdash; systems &amp; security
+            Full-stack engineer &mdash; AI systems &amp; security
           </motion.p>
 
           <motion.h1
@@ -62,10 +63,11 @@ const HeroSection = () => {
             variants={item}
             className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed"
           >
-            I build production software end to end &mdash; from clinical
-            workflows and AI-assisted developer tools to inference engines
-            written in raw assembly. Currently studying cybersecurity at SRM
-            and shipping healthcare software at EvoDoc.
+            I build production software end to end &mdash; from an LLM
+            gateway that cut serving cost by 94% and permission-aware RAG to
+            clinical tools built for SRM Hospital. Currently a technical intern
+            at Siemens and a full-stack intern at EvoDoc, while studying
+            cybersecurity at SRM.
           </motion.p>
 
           <motion.div variants={item} className="flex flex-wrap items-center gap-4 mb-12">
@@ -145,7 +147,7 @@ const HeroSection = () => {
               transition: hasScrolledOnce ? { duration: 0.25 } : { delay: 1, duration: 0.5 },
             }}
             exit={{ opacity: 0, y: 8, transition: { duration: 0.25 } }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
           >
             <span className="label-mono">Scroll</span>
             <motion.span
